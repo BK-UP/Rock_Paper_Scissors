@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Freeman&display=swap');
+:root{
+    --white: #dbdbdb;
+    --grey: #7a7a7a;
+}
+*{
+    margin: 0;
+}
+h1,h2,h3,h4,h5{
+    color: var(--white);
+    font-family: "Freeman", sans-serif;
+}
+body{
+    height: 100vh;
+    width: 100%;
+    background: radial-gradient(#3e52a3, #070741);
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+}
+
+.attribution { 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-family: "Freeman",sans-serif;
+    font-size: 15px;
+    text-align: center;
+    color: var(--white);
+
+}
+.attribution a {
+    color: #3e52a3;
+}
+/*----------------------------------------*/
+.score{
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+    
+}
+.score .scorePrint{
+    display: flex;
+    border: solid 2px var(--white);
+    gap: 10em;
+    border-radius: .25em;
+    overflow: hidden;
+    padding: 1em;
+}
+.scorePrint h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.digetScore{
+    background-color: var(--white);
+    margin: 0;
+    display: flex;
+    flex-wrap:wrap;
+    width: 80px;
+    border-radius: .25em;
+}
+.diget{
+    color: var(--grey);
+    flex-basis: 100%;
+    font-size: 3.5em;
+    text-align: center;
+    font-family:  Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 550;
+}
+.pl{
+    font-family: "Freeman", sans-serif;
+    flex-basis: 100%;
+    color: var(--grey);
+    text-align: center;
+    padding-bottom:.5em ;
+}
+.arena{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+.chooseSign{
+    margin-top: 1em;
+    width: 500px;
+    /*border: solid 2px var(--white);*/
+    height: 55vh;
+    max-height: 285px;
+    position: relative;
+}
+.triangle{
+    position: absolute;
+    left:20%;
+    top:10%;
+    z-index: -3;
+    transition: 1s ease-out;
+}
+.dissolve{
+    opacity: 0 !important;
+    translate: -50vh 50vw;
+    rotate: -45deg;
+}
+.ply img, .cpuChoice img{
+    object-fit: fill;
+    width: 40px;
+}
+.ply, .cpuChoice{
+    cursor: pointer;
+    transition: 1s ease-out;
+    
+}
+.ply::after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--white);
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    z-index: -1;
+    left: -15% !important;
+    top: -10% !important;
+}
+.rock{
+    position: absolute;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 50%;
+    left: 45%;
+    top:70%;
+}
+.rock::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    scale: 1.2;
+    left: 0;
+    top: 10px;
+    z-index: -1;
+    border-radius: 50%;
+    background-color: #f53c5b;
+}
+.rock::after{
+    border: solid 10px #ff5c77;
+}
+.paper{
+    position: absolute;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 50%;
+    left: 15%;
+    top: 0%;
+}
+.paper::after{
+    border: solid 10px #6d7bf7;
+}
+.paper::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    scale: 1.2;
+    left: 0;
+    top: 10px;
+    z-index: -1;
+    border-radius: 50%;
+    background-color: #404fd6;
+}
+.scissors{
+    position: absolute;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 50%;
+    top: 0%;
+    left: 70%;
+    animation: move 3s;
+}
+.scissors::after{
+    border: solid 10px #fdeb4a;
+}
+.scissors::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    scale: 1.2;
+    left: 0;
+    top: 10px;
+    z-index: -1;
+    border-radius: 50%;
+    background-color: #c2b11f;
+}
+/*--------------------------------------------*/
+.cpuChoice{
+    opacity: 0;
+    position: absolute;
+    padding: 20px;
+    right: 0;
+    top: 40% ;
+    scale:1.2;
+    z-index: 5;
+}
+.cpuChoice::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    scale: 1.2;
+    left: 0;
+    top: 10px;
+    z-index: -1;
+    border-radius: 50%;
+    background-color: #1f1f1f; 
+}
+.cpuChoice::after{
+    content: "";
+    display: inline-block;
+    border: solid 10px #4b4b4b;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--white);
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    z-index: -1;
+    left: -15% !important;
+    top: -10% !important;
+}
+.vs{
+    opacity: 0;
+    position: absolute;
+    font-size: 5em;
+    top: 30%;
+    right: 25%;
+    left: 25%;
+    text-align: center;
+    -webkit-user-select: none; /* Chrome, Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    transition: 1s;
+}
+.Winner{
+    opacity: 0;
+    color: var(--white);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /*border: solid 2px var(--white);*/
+    width: fit-content;
+    position: absolute;
+    padding: 5px;
+    left: 27%;
+    bottom: -10%;
+    z-index: 1;
+    transition: .5s;
+    width: 200px;
+    max-width: 200px;
+    visibility: hidden;
+}
+.Winner span{
+    flex-basis: 100%;
+    font-family: "Freeman";
+    font-size: 1.5em;
+    text-align: center;
+}
+.Winner button{
+    cursor: pointer;
+    margin-top: 20px;
+    width: fit-content;
+    font-family: "Freeman", sans-serif;
+    font-size: 1.5em;
+    color: var(--white);
+    background: none;
+    border: solid 3px var(--white);
+    border-radius: .25em;
+    transition: .5s;
+}
+.Winner button:hover{
+    background-color: var(--white);
+    color: rgba(0, 0, 0, 0.5);
+}
+.slidefromTop{
+    top:40%;
+}
+.cpuBack{
+    opacity: 0;
+    background-color: #070741;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    padding: 35px;
+    border-radius: 50%;
+    right: -3%;
+    top: 40% ;
+    box-shadow: 0 0 1em .5em #070741;
+    transition: 1.5s;
+}
+
+
+.ruleTit{
+    font-family: "Freeman",sans-serif;
+    position: absolute;
+    font-size: 1.5em;
+    left: 5%;
+    top: 5%;
+}
+.tut, .resetGame{
+    position: absolute;
+    cursor: pointer;
+    font-family: "Freeman",sans-serif;
+    color: var(--white);
+    border: solid 1px var(--white);
+    padding: .25em;
+    border-radius: .15em;
+    font-weight: 100;
+    bottom: 5%;
+    right: 5%;
+    transition: .5s;
+}
+.tut:hover, .resetGame:hover{
+    background-color: var(--white);
+    color: rgba(0, 0, 0, 0.5);
+}
+.tutInfo{
+    position: absolute;
+    background-color: var(--white);
+    padding:  4em 2em;
+    border-radius: .5em;
+    top: 5vh;
+    left: 30vw;
+    right: 30vw;
+    transform-origin: 50% 50%;
+    z-index: 10;
+    overflow: hidden;
+}
+.imgRules{
+    width: 100%;
+    align-items: center;
+}
+#close{
+    position: absolute;
+    right: 2%;
+    top: 5%;
+    padding: .25em;
+    transition: .5s;
+}
+#close:hover{
+    background-color: #e75757;
+    color: var(--white);
+}
+.resetGame{
+    bottom: 90% !important;
+}
+.visible{
+    opacity: 1;
+}
+.move {
+    left: 0% !important;
+    top: 40% !important;
+    scale: 1.2;
+}
+
+@media screen and (max-width:769px){
+    .scissors{
+        left: 75%;
+    }
+    .vs{
+        scale: .75;
+    }
+    .score .scorePrint{
+        gap: 5em !important;
+    }
+    .arena{
+        scale: 0.8;
+    }
+    .resetGame{
+        right: 80%;
+        bottom: 5% !important;
+    }
+    .tutInfo{
+        scale: .75;
+        left: 25%;
+        right: 25%;
+        width: 45%;
+    }
+    .tutInfo .imgRules{
+        width: 100%;
+    }
+    .Winner{
+        bottom: -10%;
+        scale: 1.2;
+    }
+}
+@media screen and (max-width:425px){
+    h3{
+        font-size: 1.3em;
+    }
+    .digetScore{
+        width: 70px;
+    }
+    .diget{
+        font-size: 2.5em;
+    }
+    .score .scorePrint{
+        gap: 2em !important;
+    }
+    .arena{
+        scale: 0.70;
+    }
+    .resetGame{
+        right: 80%;
+        bottom: 5% !important;
+    }
+    .Winner button{
+        margin-top: 1vh !important;
+        font-size: 1em;
+    }
+    .tutInfo{
+        left: 20%;
+        right: 20%;
+    }
+}
+@media screen and (max-width:375px){
+    .Winner{
+        left: 20%;
+        right: 20%;
+    }
+    h3{
+        font-size: 1em;
+    }
+    .digetScore{
+        width: 50px;
+    }
+    .diget{
+        font-size: 2em;
+    }
+    .score .scorePrint{
+        gap: 2em !important;
+    }
+    .arena{
+        scale: 0.65;
+    }.paper{
+        left: 10%;
+    }.rock{
+        left: 38%;
+    }
+    .tut, .resetGame {
+        font-size: .8em;
+    }
+    .attribution{
+        font-size: 10px;
+    }
+    .triangle{
+        left: 5%;
+        right: 5%;
+        scale: 0.90;
+    }
+    .resetGame{
+        right: 80%;
+        bottom: 5% !important;
+    }
+    .tutInfo{
+        left: 20%;
+        right: 20%;
+    }
+    .Winner button{
+        margin-top: 1vh !important;
+        font-size: 1em;
+    }
+}

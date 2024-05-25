@@ -3,6 +3,7 @@ import {Player, CPU} from './participants.js'
 import { Scissors,Rock,Paper } from './sign.js';
 let choices = [new Rock(), new Paper(), new Scissors()];
 let clickedSign = false;
+let tutView = false;
 $(document).ready( ()=>{
     
     let game = new Game();
@@ -19,10 +20,13 @@ $(document).ready( ()=>{
 
 let tutOnclick = ()=>{
     $(".tut").on("click", ()=>{
-        $("body").append(tutorial());
+        if(!tutView)
+            $("body").append(tutorial());
         $("#close").on("click",() =>{
             $(".tutInfo").remove();
+            tutView = false;
         });
+        tutView = true;
     });
     
 };
@@ -178,5 +182,5 @@ export let getPoints = (name)=>{
     if(val)
         return val;
     else
-        return -1;
+        return 0;
 };
